@@ -110,6 +110,7 @@
           <li><a href="#servicios">Servicios</a></li>
           <li><a href="#galeria">Galería</a></li>
           <li><a href="#nosotras">Nosotras</a></li>
+          <li><a href="#resenas">Reseñas</a></li>
           <li><a href="#contacto">Contacto</a></li>
         </ul>
         <a href="#" class="boton boton--whatsapp boton--nav js-whatsapp-link" target="_blank" rel="noopener">
@@ -252,6 +253,16 @@
     </section>
 
     <!-- 5. UBICACIÓN / CONTACTO -->
+    <!-- 5. RESEÑAS (Google) -->
+    <section class="seccion seccion--resenas" id="resenas">
+      <div class="contenedor">
+        <p class="seccion__kicker animar">Reseñas</p>
+        <h2 class="seccion__titulo animar">Qué piensan de nosotras</h2>
+        <div class="resenas__resumen animar" id="resenasResumen"></div>
+        <div class="resenas__grid" id="resenasGrid" aria-live="polite"></div>
+      </div>
+    </section>
+
     <section class="seccion seccion--rosa" id="contacto">
       <div class="contenedor">
         <p class="seccion__kicker animar">Contacto</p>
@@ -405,6 +416,46 @@
               observar(fig);
             });
           });
+      }
+
+      // Reseñas de Google (snapshot en assets/reviews.json)
+      const resenasGrid = document.getElementById("resenasGrid");
+      const resenasResumen = document.getElementById("resenasResumen");
+      if (resenasGrid) {
+        const estrellas = (n) => "★★★★★☆☆☆☆☆".slice(5 - Math.round(n), 10 - Math.round(n));
+        const iniciales = (nom) => (nom || "?").trim().split(/\s+/).slice(0, 2).map((w) => w[0] || "").join("").toUpperCase();
+        fetch("assets/reviews.json", { cache: "no-store" })
+          .then((r) => (r.ok ? r.json() : Promise.reject()))
+          .then((data) => {
+            const revs = (data && data.reviews) || [];
+            if (!revs.length) return Promise.reject();
+            if (resenasResumen) {
+              const nota = (data.rating || 5).toString().replace(".", ",");
+              resenasResumen.innerHTML =
+                '<span class="resenas__nota">' + nota + "</span>" +
+                '<span class="resenas__estrellas" aria-hidden="true">' + estrellas(data.rating || 5) + "</span>" +
+                '<span class="resenas__meta">Basado en ' + (data.count || revs.length) +
+                ' reseñas en <a href="' + (data.url || "#") + '" target="_blank" rel="noopener">Google</a></span>';
+            }
+            revs.forEach((rv, i) => {
+              const card = document.createElement("figure");
+              card.className = "resena animar";
+              card.setAttribute("data-animar", "sube");
+              card.style.transitionDelay = Math.min(i * 70, 420) + "ms";
+              card.innerHTML =
+                '<div class="resena__top">' +
+                  '<span class="resena__avatar" aria-hidden="true">' + iniciales(rv.name) + "</span>" +
+                  '<div class="resena__id"><span class="resena__nombre">' + (rv.name || "Cliente") + "</span>" +
+                  '<span class="resena__fecha">' + (rv.date || "") + "</span></div>" +
+                  '<span class="resena__g" title="Reseña de Google" aria-hidden="true">G</span>' +
+                "</div>" +
+                '<div class="resena__estrellas" aria-label="' + (rv.stars || 5) + ' de 5">' + estrellas(rv.stars || 5) + "</div>" +
+                '<blockquote class="resena__texto">' + (rv.text || "") + "</blockquote>";
+              resenasGrid.appendChild(card);
+              observar(card);
+            });
+          })
+          .catch(() => { const s = document.getElementById("resenas"); if (s) s.hidden = true; });
       }
 
       document.getElementById("anioActual").textContent = new Date().getFullYear();

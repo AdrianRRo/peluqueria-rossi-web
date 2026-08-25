@@ -1,0 +1,56 @@
+{
+  "place": "Rossi salón de belleza",
+  "rating": 5,
+  "count": 14,
+  "url": "https://search.google.com/local/reviews?placeid=ChIJ_a6uBAD7cg0RHI2rUBl6_uM",
+  "reviews": [
+    {
+      "name": "isabel luna",
+      "stars": 5,
+      "date": "Hace 3 meses",
+      "text": "Quería dejar una reseña para la peluquería de Rosi porque de verdad se lo merece. Desde que entras, el trato es impresionante, cercano, amable y muy profesional. Rosi te hace sentir como en casa y se nota que le apasiona su trabajo. La peluquería está recién abierta en Alhaurín de la Torre y da gusto encontrar sitios a"
+    },
+    {
+      "name": "Florencia Romero",
+      "stars": 5,
+      "date": "Hace 3 meses",
+      "text": "Es la vez que mejor me han dejado el pelo en la vida. Rosalí tiene muy buena mano y me dejó el pelo precioso, suave, ligero y brillante, y el corte perfecto. ¡Volveré seguro!"
+    },
+    {
+      "name": "Erica Postigo",
+      "stars": 5,
+      "date": "Hace 4 meses",
+      "text": "Rossi es una profesional y un encanto. Quería hacerme un cambio drástico y me ayudó a escoger el color, estoy muy contenta con el resultado. Además, mi pelo es rizado y difícil y también ha sabido adaptarme el corte de pelo a lo que yo quería y me lo dejó muy bien hidratado. Gracias 😊"
+    },
+    {
+      "name": "Priscila palomeque",
+      "stars": 5,
+      "date": "Hace 5 meses",
+      "text": "La verdad que Rosalí tiene arte en las manos, me ah hecho una nutrición y mi pelo quedó muy suave e hidratado, también me ah hecho un corte de pelo, exactamente como lo quería. Estoy muy feliz con el resultado. Volveré muy pronto!"
+    },
+    {
+      "name": "Daniela Dorta",
+      "stars": 5,
+      "date": "Hace 4 meses",
+      "text": "Un servicio increíble. Fui para un tratamiento de hidratación y unas mechas y el cabello me quedó suave y brillante. La atención es genial!"
+    },
+    {
+      "name": "María Victoria González Cotilla",
+      "stars": 5,
+      "date": "Hace 2 meses",
+      "text": "Por fin una persona que se preocupa por mi pelo, por lo que le hace falta y lo que no. Rossi es una profesional, me ha dejado el pelo precioso con su hidratación ya que lo tenía fatal, además de ser un encanto de persona."
+    },
+    {
+      "name": "RICHARD cruz Nuñez",
+      "stars": 5,
+      "date": "Hace 4 meses",
+      "text": "Trato impecable y un servicio excelente, El corte me gusto mucho y la peluquera una máquina."
+    },
+    {
+      "name": "gaby rodríguez",
+      "stars": 5,
+      "date": "Hace 4 meses",
+      "text": "Ya he ido dos veces. Una a cortarme el pelo y la otra para hacerme unas mechas. Rosi es toda una profesional, quedé muy contenta tanto como con el corte de pelo como con el color y la aplicación de las mechas."
+    }
+  ]
+}
