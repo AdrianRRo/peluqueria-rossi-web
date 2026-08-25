@@ -120,7 +120,7 @@ body.menu-open { overflow: hidden; }
   margin: 0;
   padding: 0;
 }
-.nav a {
+.nav ul a {
   text-decoration: none;
   color: var(--tinta);
   font-weight: 400;
@@ -568,7 +568,7 @@ body.menu-open { overflow: hidden; }
   }
   .nav--abierto { transform: translateX(0); }
   .nav ul { flex-direction: column; gap: 1.1rem; }
-  .nav a { font-size: 1.1rem; }
+  .nav ul a { font-size: 1.1rem; }
   .cabecera:not(.cabecera--scroll) .logo { color: #fff; }
   .cabecera:not(.cabecera--scroll) .logo__texto em { color: #ffd7e6; }
 
