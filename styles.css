@@ -126,6 +126,15 @@ body:not(.menu-open) .cabecera:not(.cabecera--scroll) .menu-toggle span { backgr
   .cabecera:not(.cabecera--scroll) .nav ul a { color: rgba(255, 255, 255, 0.92); }
   .cabecera:not(.cabecera--scroll) .nav ul a:hover { color: #fff; }
 }
+/* En páginas secundarias (servicios.html) la cabecera NO va sobre el hero
+   oscuro, así que el logo/nav se mantienen en su color por defecto. */
+body.pagina-secundaria .cabecera:not(.cabecera--scroll) .logo { color: var(--tinta); }
+body.pagina-secundaria .cabecera:not(.cabecera--scroll) .logo__icono { color: var(--rosa-fuerte); }
+body.pagina-secundaria .cabecera:not(.cabecera--scroll) .logo__texto em { color: var(--rosa-oscuro); }
+body.pagina-secundaria .cabecera:not(.cabecera--scroll) .menu-toggle span { background: var(--tinta); }
+@media (min-width: 861px) {
+  body.pagina-secundaria .cabecera:not(.cabecera--scroll) .nav ul a { color: var(--tinta); }
+}
 
 .nav { display: flex; align-items: center; gap: 1.6rem; }
 .nav ul {
@@ -153,6 +162,10 @@ body:not(.menu-open) .cabecera:not(.cabecera--scroll) .menu-toggle span { backgr
 }
 .nav ul a:hover::after,
 .nav ul a:focus::after { width: 100%; }
+.nav ul a[aria-current="page"],
+.nav ul a.nav-activo { color: var(--rosa-oscuro); font-weight: 600; }
+.nav ul a[aria-current="page"]::after,
+.nav ul a.nav-activo::after { width: 100%; }
 
 .menu-toggle {
   display: none;
@@ -200,6 +213,12 @@ body:not(.menu-open) .cabecera:not(.cabecera--scroll) .menu-toggle span { backgr
   backdrop-filter: blur(4px);
 }
 .boton--fantasma:hover { background: rgba(255,255,255,0.28); transform: translateY(-3px); }
+.boton--rosa {
+  background: var(--rosa);
+  color: #fff;
+  box-shadow: 0 12px 26px -12px rgba(215, 109, 146, 0.55);
+}
+.boton--rosa:hover { background: var(--rosa-fuerte); transform: translateY(-3px); }
 .icono-whatsapp { flex: none; }
 
 /* ---------- HERO ---------- */
@@ -363,11 +382,6 @@ body:not(.menu-open) .cabecera:not(.cabecera--scroll) .menu-toggle span { backgr
 }
 
 /* ---------- Servicios ---------- */
-.servicios__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.4rem;
-}
 .servicio-categoria {
   background: var(--blanco);
   border: 1px solid var(--rosa-claro);
@@ -377,6 +391,7 @@ body:not(.menu-open) .cabecera:not(.cabecera--scroll) .menu-toggle span { backgr
   transition: transform var(--transicion), box-shadow var(--transicion);
 }
 .servicio-categoria:hover { transform: translateY(-6px); box-shadow: var(--sombra); }
+.servicio-categoria h2,
 .servicio-categoria h3 {
   display: flex;
   align-items: center;
@@ -387,6 +402,7 @@ body:not(.menu-open) .cabecera:not(.cabecera--scroll) .menu-toggle span { backgr
   margin: 0 0 1rem;
   color: var(--rosa-oscuro);
 }
+.servicio-categoria h2 svg,
 .servicio-categoria h3 svg { color: var(--rosa-fuerte); flex: none; }
 .lista-servicios { list-style: none; margin: 0; padding: 0; }
 .lista-servicios li {
@@ -408,6 +424,92 @@ body:not(.menu-open) .cabecera:not(.cabecera--scroll) .menu-toggle span { backgr
 .servicio-categoria--productos { background: linear-gradient(160deg, #fff, var(--rosa-muy-claro)); }
 .servicio-categoria--productos p { margin: 0; color: var(--tinta-suave); }
 .servicios__cta { text-align: center; margin-top: 2.8rem; }
+
+/* ---------- Servicios: píldoras de categoría (index) ---------- */
+.servicios__pildoras {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.2rem;
+}
+.servicio-pildora {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  background: var(--blanco);
+  border: 1px solid var(--rosa-claro);
+  border-radius: var(--radio);
+  padding: 1.6rem 1.5rem;
+  box-shadow: var(--sombra-suave);
+  text-decoration: none;
+  color: var(--tinta);
+  transition: transform var(--transicion), box-shadow var(--transicion);
+}
+.servicio-pildora:hover { transform: translateY(-6px); box-shadow: var(--sombra); }
+.servicio-pildora__icono { color: var(--rosa-fuerte); flex: none; }
+.servicio-pildora h3 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.12rem;
+  margin: 0;
+  color: var(--rosa-oscuro);
+}
+.servicio-pildora p {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--tinta-suave);
+  line-height: 1.45;
+}
+.servicio-pildora__enlace {
+  margin-top: auto;
+  padding-top: 0.3rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--rosa-fuerte);
+}
+.servicios__nota {
+  text-align: center;
+  color: var(--tinta-suave);
+  font-size: 0.92rem;
+  margin: 1.6rem 0 0;
+}
+
+/* ---------- Página de servicios: cabecera e índice de categorías ---------- */
+.pagina-cabecera {
+  padding: clamp(7.5rem, 16vw, 10rem) 0 clamp(2.4rem, 6vw, 4rem);
+  background: linear-gradient(160deg, var(--rosa-muy-claro), var(--rosa-claro));
+  text-align: center;
+}
+.pagina-cabecera .seccion__intro { margin-left: auto; margin-right: auto; }
+.servicios__indice {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+  margin: 1.8rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.servicios__indice a {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--rosa-oscuro);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  box-shadow: var(--sombra-suave);
+  transition: background var(--transicion), color var(--transicion), transform var(--transicion);
+}
+.servicios__indice a:hover { background: var(--rosa-fuerte); color: #fff; transform: translateY(-2px); }
+
+.servicio-categoria--detalle { max-width: 760px; margin: 0 auto 1.6rem; }
+.servicio-categoria--detalle:last-of-type { margin-bottom: 0; }
+.servicio-categoria--detalle .lista-servicios { columns: 2 220px; column-gap: 2.2rem; }
+.servicio-categoria--detalle .lista-servicios li { break-inside: avoid; }
+.cta-final { text-align: center; margin-top: 2.8rem; }
 
 /* ---------- Galería ---------- */
 .galeria__grid {
@@ -560,11 +662,10 @@ body:not(.menu-open) .cabecera:not(.cabecera--scroll) .menu-toggle span { backgr
   transform: none;
 }
 /* stagger para tarjetas de servicios y galería */
-.servicios__grid .animar:nth-child(2){ transition-delay: 0.12s; }
-.servicios__grid .animar:nth-child(3){ transition-delay: 0.18s; }
-.servicios__grid .animar:nth-child(4){ transition-delay: 0.24s; }
-.servicios__grid .animar:nth-child(5){ transition-delay: 0.3s; }
-.servicios__grid .animar:nth-child(6){ transition-delay: 0.36s; }
+.servicios__pildoras .animar:nth-child(2){ transition-delay: 0.1s; }
+.servicios__pildoras .animar:nth-child(3){ transition-delay: 0.16s; }
+.servicios__pildoras .animar:nth-child(4){ transition-delay: 0.22s; }
+.servicios__pildoras .animar:nth-child(5){ transition-delay: 0.28s; }
 .galeria__grid .animar:nth-child(2){ transition-delay: 0.1s; }
 .galeria__grid .animar:nth-child(3){ transition-delay: 0.16s; }
 .galeria__grid .animar:nth-child(4){ transition-delay: 0.22s; }
