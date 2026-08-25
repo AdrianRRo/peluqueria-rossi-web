@@ -113,6 +113,20 @@ body.menu-open { overflow: hidden; }
 .logo__icono { color: var(--rosa-fuerte); flex: none; }
 .logo__texto em { color: var(--rosa-oscuro); font-style: italic; }
 
+/* Cabecera transparente sobre el hero: contenido en claro hasta hacer scroll.
+   Al añadir .cabecera--scroll (JS, scrollY>20) el fondo pasa a blanco y vuelven
+   los colores por defecto. */
+.cabecera:not(.cabecera--scroll) .logo { color: #fff; }
+.cabecera:not(.cabecera--scroll) .logo__icono { color: #ffd7e6; }
+.cabecera:not(.cabecera--scroll) .logo__texto em { color: #ffd7e6; }
+body:not(.menu-open) .cabecera:not(.cabecera--scroll) .menu-toggle span { background: #fff; }
+/* Los enlaces del nav solo se aclaran en escritorio; en móvil el nav es un
+   cajón de fondo crema y deben seguir oscuros. */
+@media (min-width: 861px) {
+  .cabecera:not(.cabecera--scroll) .nav ul a { color: rgba(255, 255, 255, 0.92); }
+  .cabecera:not(.cabecera--scroll) .nav ul a:hover { color: #fff; }
+}
+
 .nav { display: flex; align-items: center; gap: 1.6rem; }
 .nav ul {
   display: flex;
@@ -617,8 +631,6 @@ body.menu-open { overflow: hidden; }
   .nav--abierto { transform: translateX(0); }
   .nav ul { flex-direction: column; gap: 1.1rem; }
   .nav ul a { font-size: 1.1rem; }
-  .cabecera:not(.cabecera--scroll) .logo { color: #fff; }
-  .cabecera:not(.cabecera--scroll) .logo__texto em { color: #ffd7e6; }
 
   .nosotras__grid { grid-template-columns: 1fr; }
   .nosotras__imagen { order: -1; }
