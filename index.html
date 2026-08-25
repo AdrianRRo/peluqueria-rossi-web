@@ -91,6 +91,8 @@
 
   <a class="salto-contenido" href="#contenido">Ir al contenido principal</a>
 
+  <div class="menu-overlay" id="menuOverlay" aria-hidden="true"></div>
+
   <header class="cabecera" id="cabecera">
     <div class="contenedor cabecera__interior">
       <a href="#inicio" class="logo">
@@ -224,23 +226,7 @@
         <p class="seccion__intro animar">Un ambiente cuidado y resultados que hablan por sí solos. Encuentra más trabajos en nuestro Instagram
           <a href="https://www.instagram.com/rossisalondebelleza/" target="_blank" rel="noopener">@rossisalondebelleza</a>.
         </p>
-        <div class="galeria__grid">
-          <figure class="galeria__item galeria__item--alta animar" data-animar="zoom">
-            <img src="assets/color.jpg" alt="Detalle de mechas y balayage con acabado brillante en Peluquería Rossi" loading="lazy" width="800" height="800" />
-          </figure>
-          <figure class="galeria__item animar" data-animar="zoom">
-            <img src="assets/salon.jpg" alt="Interior del salón de belleza Rossi en Alhaurín de la Torre" loading="lazy" width="800" height="600" />
-          </figure>
-          <figure class="galeria__item animar" data-animar="zoom">
-            <img src="assets/care.jpg" alt="Productos profesionales de cuidado capilar en Peluquería Rossi" loading="lazy" width="800" height="800" />
-          </figure>
-          <figure class="galeria__item galeria__item--ancha animar" data-animar="zoom">
-            <img src="assets/roses.jpg" alt="Detalle floral rosa, imagen de marca de Peluquería Rossi" loading="lazy" width="1200" height="675" />
-          </figure>
-          <figure class="galeria__item animar" data-animar="zoom">
-            <img src="assets/bridal.jpg" alt="Recogido con rosas para novia y eventos en Peluquería Rossi" loading="lazy" width="800" height="800" />
-          </figure>
-        </div>
+        <div class="galeria__grid" id="galeriaGrid" aria-live="polite"></div>
       </div>
     </section>
 
@@ -351,18 +337,21 @@
         enlace.setAttribute("href", url);
       });
 
-      // Menú móvil
+      // Menú móvil (con overlay y bloqueo de scroll)
       const menuToggle = document.getElementById("menuToggle");
       const navPrincipal = document.getElementById("navPrincipal");
-      menuToggle.addEventListener("click", () => {
-        const abierto = navPrincipal.classList.toggle("nav--abierto");
+      const overlay = document.getElementById("menuOverlay");
+      const setMenu = (abierto) => {
+        navPrincipal.classList.toggle("nav--abierto", abierto);
+        overlay.classList.toggle("visible", abierto);
+        document.body.classList.toggle("menu-open", abierto);
         menuToggle.setAttribute("aria-expanded", abierto ? "true" : "false");
-      });
+      };
+      menuToggle.addEventListener("click", () => setMenu(!navPrincipal.classList.contains("nav--abierto")));
+      overlay.addEventListener("click", () => setMenu(false));
+      document.addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
       navPrincipal.querySelectorAll("a").forEach((enlace) => {
-        enlace.addEventListener("click", () => {
-          navPrincipal.classList.remove("nav--abierto");
-          menuToggle.setAttribute("aria-expanded", "false");
-        });
+        enlace.addEventListener("click", () => setMenu(false));
       });
 
       // Cabecera con sombra al hacer scroll
@@ -375,19 +364,47 @@
 
       // Animaciones de aparición al hacer scroll (respeta reduce-motion)
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const animables = document.querySelectorAll(".animar");
-      if (reduce || !("IntersectionObserver" in window)) {
-        animables.forEach((el) => el.classList.add("visible"));
-      } else {
-        const io = new IntersectionObserver((entradas) => {
-          entradas.forEach((e) => {
-            if (e.isIntersecting) {
-              e.target.classList.add("visible");
-              io.unobserve(e.target);
-            }
+      const usaIO = !reduce && ("IntersectionObserver" in window);
+      const io = usaIO ? new IntersectionObserver((entradas) => {
+        entradas.forEach((e) => {
+          if (e.isIntersecting) { e.target.classList.add("visible"); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }) : null;
+      const observar = (el) => { if (io) io.observe(el); else el.classList.add("visible"); };
+      document.querySelectorAll(".animar").forEach(observar);
+
+      // Galería dinámica: muestra las imágenes que haya en assets/gallery/manifest.json
+      const grid = document.getElementById("galeriaGrid");
+      if (grid) {
+        fetch("assets/gallery/manifest.json", { cache: "no-store" })
+          .then((r) => (r.ok ? r.json() : Promise.reject()))
+          .then((data) => {
+            const imgs = (data && data.images) || [];
+            if (!imgs.length) return Promise.reject();
+            imgs.forEach((it, i) => {
+              const fig = document.createElement("figure");
+              fig.className = "galeria__item animar";
+              fig.setAttribute("data-animar", "zoom");
+              const img = document.createElement("img");
+              img.src = "assets/gallery/" + it.file;
+              img.alt = it.alt || "Trabajo de Peluquería Rossi";
+              img.loading = "lazy";
+              fig.appendChild(img);
+              grid.appendChild(fig);
+              observar(fig);
+            });
+          })
+          .catch(() => {
+            // Fallback: imágenes de marca si no hay galería configurada
+            ["salon.jpg", "color.jpg", "care.jpg", "roses.jpg", "bridal.jpg"].forEach((f) => {
+              const fig = document.createElement("figure");
+              fig.className = "galeria__item animar";
+              fig.setAttribute("data-animar", "zoom");
+              fig.innerHTML = '<img src="assets/' + f + '" alt="Peluquería Rossi" loading="lazy" />';
+              grid.appendChild(fig);
+              observar(fig);
+            });
           });
-        }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
-        animables.forEach((el) => io.observe(el));
       }
 
       document.getElementById("anioActual").textContent = new Date().getFullYear();
