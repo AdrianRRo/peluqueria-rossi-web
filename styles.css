@@ -219,6 +219,8 @@ body.menu-open { overflow: hidden; }
   z-index: 2;
   max-width: 720px;
   padding-top: 5rem;
+  /* Reserva hueco bajo los botones para que nunca toquen el icono de scroll */
+  padding-bottom: clamp(4.5rem, 9vh, 7rem);
 }
 .hero__kicker {
   text-transform: uppercase;
@@ -309,6 +311,11 @@ body.menu-open { overflow: hidden; }
   0% { opacity: 0; transform: translateY(0); }
   40% { opacity: 1; }
   100% { opacity: 0; transform: translateY(14px); }
+}
+/* En pantallas de poca altura no hay hueco para el icono: se oculta */
+@media (max-height: 660px) {
+  .hero__scroll { display: none; }
+  .hero__contenido { padding-bottom: 2.5rem; }
 }
 
 /* ---------- Secciones ---------- */
