@@ -351,6 +351,31 @@ body.pagina-secundaria .cabecera:not(.cabecera--scroll) .menu-toggle span { back
   .hero__scroll { display: none; }
   .hero__contenido { padding-bottom: 2.5rem; }
 }
+/* En móvil/táctil el "ratón" no tiene sentido: lo cambiamos por un chevron
+   que rebota hacia abajo (gesto de "desliza"). Reutiliza el mismo <span>. */
+@media (pointer: coarse), (max-width: 860px) {
+  .hero__scroll {
+    border: 0;
+    width: 30px; height: 30px;
+    bottom: 20px;
+  }
+  .hero__scroll span {
+    left: 50%; top: 50%;
+    width: 13px; height: 13px;
+    margin: 0;
+    background: none;
+    border: 0;
+    border-right: 2px solid rgba(255, 255, 255, 0.85);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.85);
+    border-radius: 2px;
+    transform: translate(-50%, -70%) rotate(45deg);
+    animation: chevronRebota 1.8s ease-in-out infinite;
+  }
+}
+@keyframes chevronRebota {
+  0%, 100% { transform: translate(-50%, -70%) rotate(45deg); opacity: 0.55; }
+  50%      { transform: translate(-50%, -10%) rotate(45deg); opacity: 1; }
+}
 
 /* ---------- Secciones ---------- */
 .seccion { padding: clamp(4rem, 9vw, 7.5rem) 0; position: relative; }
