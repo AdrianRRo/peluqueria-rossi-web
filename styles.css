@@ -86,12 +86,13 @@ a { color: var(--rosa-oscuro); }
   position: fixed;
   inset: 0;
   background: rgba(45, 20, 32, 0.42);
-  z-index: 105;
+  z-index: 110;
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
-  transition: opacity var(--transicion);
+  transition: opacity var(--transicion), visibility var(--transicion);
 }
-.menu-overlay.visible { opacity: 1; pointer-events: auto; }
+.menu-overlay.visible { opacity: 1; visibility: visible; pointer-events: auto; }
 body.menu-open { overflow: hidden; }
 .cabecera__interior {
   display: flex;
