@@ -365,38 +365,42 @@
       const observar = (el) => { if (io) io.observe(el); else el.classList.add("visible"); };
       document.querySelectorAll(".animar").forEach(observar);
 
-      // Galería dinámica: muestra las imágenes que haya en assets/gallery/manifest.json
+      // Galería dinámica. Prioridad: 1) API (lo que sube la dueña desde su panel),
+      // 2) manifest.json estático, 3) imágenes de marca. Cascada de fallback => si el
+      // API no responde, la web sigue mostrando exactamente lo de ahora.
+      const API_BASE = "https://botarmy.tail0680ed.ts.net:10000";
       const grid = document.getElementById("galeriaGrid");
       if (grid) {
-        fetch("assets/gallery/manifest.json", { cache: "no-store" })
+        const pinta = (src, alt) => {
+          const fig = document.createElement("figure");
+          fig.className = "galeria__item animar";
+          fig.setAttribute("data-animar", "zoom");
+          const img = document.createElement("img");
+          img.src = src;
+          img.alt = alt || "Trabajo de Peluquería Rossi";
+          img.loading = "lazy";
+          fig.appendChild(img);
+          grid.appendChild(fig);
+          observar(fig);
+        };
+        const desdeManifest = () =>
+          fetch("assets/gallery/manifest.json", { cache: "no-store" })
+            .then((r) => (r.ok ? r.json() : Promise.reject()))
+            .then((data) => {
+              const imgs = (data && data.images) || [];
+              if (!imgs.length) return Promise.reject();
+              imgs.forEach((it) => pinta("assets/gallery/" + it.file, it.alt));
+            });
+        const desdeMarca = () =>
+          ["salon.jpg", "color.jpg", "care.jpg", "roses.jpg", "bridal.jpg"]
+            .forEach((f) => pinta("assets/" + f, "Peluquería Rossi"));
+        fetch(API_BASE + "/api/gallery", { cache: "no-store" })
           .then((r) => (r.ok ? r.json() : Promise.reject()))
-          .then((data) => {
-            const imgs = (data && data.images) || [];
-            if (!imgs.length) return Promise.reject();
-            imgs.forEach((it, i) => {
-              const fig = document.createElement("figure");
-              fig.className = "galeria__item animar";
-              fig.setAttribute("data-animar", "zoom");
-              const img = document.createElement("img");
-              img.src = "assets/gallery/" + it.file;
-              img.alt = it.alt || "Trabajo de Peluquería Rossi";
-              img.loading = "lazy";
-              fig.appendChild(img);
-              grid.appendChild(fig);
-              observar(fig);
-            });
+          .then((imgs) => {
+            if (!Array.isArray(imgs) || !imgs.length) return Promise.reject();
+            imgs.forEach((it) => pinta(API_BASE + "/api/gallery/" + it.id, it.alt));
           })
-          .catch(() => {
-            // Fallback: imágenes de marca si no hay galería configurada
-            ["salon.jpg", "color.jpg", "care.jpg", "roses.jpg", "bridal.jpg"].forEach((f) => {
-              const fig = document.createElement("figure");
-              fig.className = "galeria__item animar";
-              fig.setAttribute("data-animar", "zoom");
-              fig.innerHTML = '<img src="assets/' + f + '" alt="Peluquería Rossi" loading="lazy" />';
-              grid.appendChild(fig);
-              observar(fig);
-            });
-          });
+          .catch(() => desdeManifest().catch(desdeMarca));
       }
 
       // Reseñas de Google (snapshot en assets/reviews.json)
