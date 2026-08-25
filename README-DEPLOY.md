@@ -1,37 +1,42 @@
-# Peluquería Rossi — Web estática
+# Peluquería Rossi — Web de marketing (estática)
 
-Sitio 100% estático (HTML + CSS + JS mínimo). No hay build step, no hay dependencias, no hay `node_modules`.
+Landing de **captación** del salón. Sitio 100% estático (HTML + CSS + JS mínimo).
+Sin build step, sin dependencias, sin `node_modules`.
+
+> IMPORTANTE (para jose-peluqueria): **esto NO es la app de gestión.** La app que
+> usa Rosali vive en otro repo (`AdrianRRo/peluqueria-rossi`) y su base de datos de
+> producción (`rossi`) **no se toca nunca** desde aquí. Este directorio es solo la
+> web de marketing.
 
 ## Archivos
+- `index.html` — landing completa (hero, servicios sin precio, galería, nosotras, contacto).
+- `styles.css` — estilos (motion site, responsive, `prefers-reduced-motion`).
+- `assets/` — imágenes de marca (hero, galería, `og-image.jpg`).
+- `robots.txt`, `sitemap.xml` — SEO.
 
-- `index.html` — página única con toda la web (hero, servicios, sobre nosotras, horario, contacto, footer).
-- `styles.css` — todos los estilos.
-- `robots.txt` — indicaciones para buscadores.
-- `sitemap.xml` — mapa del sitio para SEO.
+## Datos reales del salón (ya cargados)
+- Nombre: **Peluquería y Salón de Belleza Rossi** · dueña **Rosali Cruz Núñez**.
+- Dirección: **Calle San Juan, 2, 29130 Alhaurín de la Torre (Málaga)**.
+- Teléfono / WhatsApp: **613 15 33 80** (`wa.me/34613153380`).
+- Instagram: **@rossisalondebelleza**.
+- Horario: martes a sábado desde las 10:00 (lunes y domingo cerrado).
+- **Sin precios en la web** (solo lista de servicios), por decisión de Adrián.
 
-## Desplegar en Render (Static Site)
+## Deploy (Static Site en Render — YA CONFIGURADO)
+- Servicio Render: **peluqueria-rossi-web** (`srv-da6fbt67bikc738ddb4g`).
+- URL: **https://peluqueria-rossi-web.onrender.com** · rewrite `/*` → `/index.html`.
+- Repo: **`AdrianRRo/peluqueria-rossi-web`**, rama `main`, **autodeploy** activado.
+- Publicar cambios:
+  ```bash
+  # (jose trabaja en plan; el push lo aprueba peluqueria-super / Adrián)
+  git -C /tmp/pelu-web-repo add -A && git -C /tmp/pelu-web-repo commit -m "..." && git -C /tmp/pelu-web-repo push
+  ```
 
-1. Sube este directorio (`services/peluqueria-web`) a un repositorio Git (o usa el repo actual si Render apunta a un subdirectorio).
-2. En Render: **New + → Static Site**.
-3. Conecta el repositorio y configura:
-   - **Root Directory**: `services/peluqueria-web`
-   - **Build Command**: (déjalo vacío, no hace falta build)
-   - **Publish Directory**: `.` (la raíz de este directorio)
-4. Deploy. Render servirá `index.html` directamente.
+## Flujo de calidad (obligatorio)
+1. Probar en local (`python3 -m http.server`) y revisar responsive + enlaces.
+2. Pedir veredicto a **peluqueria-qa** (`ask-peluqueria-qa "..."`).
+3. Solo con **OK** → push → Render deploya → QA verifica que la URL sigue viva.
 
-No requiere variables de entorno ni backend.
-
-## Placeholders pendientes de rellenar
-
-Antes de publicar, edita `index.html` y sustituye:
-
-- **`NUMERO_WHATSAPP`** (dentro del `<script>` al final del `<body>`): número en formato internacional sin espacios, ej. `34612345678`.
-- **`[CIUDAD]`**: aparece en el `<title>`, meta description, hero, contacto y JSON-LD.
-- **`[DIRECCIÓN A COMPLETAR]`**: dirección del salón (contacto y JSON-LD).
-- **`[TELÉFONO]`**: teléfono de contacto (contacto, `tel:` y JSON-LD).
-- **`[PROVINCIA]`** y **`[CÓDIGO POSTAL]`**: dentro del JSON-LD (`address`).
-- **Google Maps**: en la sección de contacto hay un bloque `<!-- ... -->` comentado con el `<iframe>` de Google Maps. Descomenta y pega la URL real (Google Maps → Compartir → Insertar un mapa).
-- **Instagram**: revisa que `https://www.instagram.com/peluqueriarossi/` sea la cuenta real (aparece en contacto, footer y JSON-LD `sameAs`).
-- **Dominio**: `https://www.peluqueriarossi.com/` se usa como `canonical`, Open Graph, JSON-LD y en `robots.txt`/`sitemap.xml`. Sustitúyelo por el dominio real una vez esté decidido.
-- **Horario**: los horarios de mañana/tarde están marcados con comentarios `<!-- EDITABLE -->` en la sección de horario; ajústalos si difieren.
-- **`assets/og-image.jpg`**: las metaetiquetas Open Graph/Twitter apuntan a esta imagen; añade una imagen real en `assets/` (ideal 1200x630px) o cambia la ruta.
+## Pendiente de Adrián (opcional)
+- Dominio propio (para quitar `onrender.com` del canonical/OG/sitemap).
+- Fotos reales del trabajo del salón (sustituir imágenes generadas por fotos de Instagram).
