@@ -1,0 +1,697 @@
+/* ===== Peluquería Rossi — estilos ===== */
+
+:root {
+  --rosa-clarisimo: #fdf1f6;
+  --rosa-claro: #fbe0ec;
+  --rosa: #e8a1c4;
+  --rosa-medio: #d6528f;
+  --rosa-fuerte: #b8306a;
+  --burdeos: #7a2048;
+  --dorado: #c9a227;
+  --blanco: #ffffff;
+  --gris-texto: #4a3b42;
+  --gris-suave: #8a7580;
+  --whatsapp: #25d366;
+  --whatsapp-oscuro: #1ea952;
+
+  --fuente-titulos: "Playfair Display", Georgia, serif;
+  --fuente-texto: "Poppins", "Segoe UI", sans-serif;
+
+  --radio: 16px;
+  --sombra: 0 10px 30px rgba(184, 48, 106, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: var(--fuente-texto);
+  color: var(--gris-texto);
+  background: var(--blanco);
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  font-family: var(--fuente-titulos);
+  color: var(--burdeos);
+  margin: 0 0 0.5em;
+  line-height: 1.2;
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+a {
+  color: var(--rosa-fuerte);
+  text-decoration: none;
+}
+
+a:hover, a:focus-visible {
+  color: var(--burdeos);
+}
+
+:focus-visible {
+  outline: 3px solid var(--dorado);
+  outline-offset: 2px;
+}
+
+img, svg {
+  max-width: 100%;
+}
+
+.contenedor {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.salto-contenido {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--burdeos);
+  color: var(--blanco);
+  padding: 12px 20px;
+  z-index: 1000;
+}
+
+.salto-contenido:focus {
+  left: 12px;
+  top: 12px;
+}
+
+.visualmente-oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ===== Botones ===== */
+
+.boton {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 26px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.98rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.boton:hover, .boton:focus-visible {
+  transform: translateY(-2px);
+}
+
+.boton--whatsapp {
+  background: var(--whatsapp);
+  color: var(--blanco);
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.35);
+}
+
+.boton--whatsapp:hover, .boton--whatsapp:focus-visible {
+  background: var(--whatsapp-oscuro);
+  color: var(--blanco);
+}
+
+.boton--fantasma {
+  background: transparent;
+  border-color: var(--rosa-medio);
+  color: var(--burdeos);
+}
+
+.boton--fantasma:hover, .boton--fantasma:focus-visible {
+  background: var(--rosa-clarisimo);
+}
+
+.boton--grande {
+  padding: 16px 32px;
+  font-size: 1.05rem;
+}
+
+.boton--nav {
+  padding: 10px 20px;
+  font-size: 0.9rem;
+}
+
+/* ===== Cabecera ===== */
+
+.cabecera {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--rosa-claro);
+}
+
+.cabecera__interior {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--fuente-titulos);
+  font-size: 1.35rem;
+  color: var(--burdeos);
+}
+
+.logo__icono {
+  color: var(--rosa-medio);
+}
+
+.logo__texto em {
+  font-style: italic;
+  color: var(--rosa-medio);
+}
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  width: 24px;
+  height: 2px;
+  background: var(--burdeos);
+  border-radius: 2px;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.nav ul {
+  display: flex;
+  gap: 22px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav a {
+  color: var(--gris-texto);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.nav a:hover, .nav a:focus-visible {
+  color: var(--rosa-fuerte);
+}
+
+/* ===== Hero ===== */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(160deg, var(--rosa-clarisimo) 0%, var(--rosa-claro) 55%, var(--rosa) 100%);
+  padding: 90px 0 100px;
+  text-align: center;
+}
+
+.hero__decoracion {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  color: var(--rosa-fuerte);
+  opacity: 0.18;
+}
+
+.hero__decoracion svg:nth-child(1) {
+  position: absolute;
+  top: 8%;
+  left: 4%;
+  transform: rotate(-12deg);
+}
+
+.hero__decoracion svg:nth-child(2) {
+  position: absolute;
+  bottom: 10%;
+  right: 6%;
+  transform: rotate(18deg);
+}
+
+.hero__decoracion svg:nth-child(3) {
+  position: absolute;
+  top: 55%;
+  left: 45%;
+  transform: rotate(6deg);
+}
+
+.hero__contenido {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+}
+
+.hero__kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.85rem;
+  color: var(--burdeos);
+  margin-bottom: 10px;
+}
+
+.hero__titulo {
+  font-size: clamp(2.6rem, 6vw, 4.2rem);
+  margin-bottom: 0.3em;
+}
+
+.hero__claim {
+  font-size: 1.15rem;
+  color: var(--gris-texto);
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 28px;
+}
+
+/* ===== Secciones genéricas ===== */
+
+.seccion {
+  padding: 80px 0;
+}
+
+.seccion--clara {
+  background: var(--rosa-clarisimo);
+}
+
+.seccion--rosa {
+  background: linear-gradient(135deg, var(--rosa-claro), var(--rosa-clarisimo));
+}
+
+.seccion__kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.82rem;
+  color: var(--rosa-fuerte);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.seccion__titulo {
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  margin-bottom: 0.4em;
+}
+
+.seccion__intro {
+  max-width: 640px;
+  color: var(--gris-suave);
+}
+
+/* ===== Servicios ===== */
+
+.servicios__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.servicio-categoria {
+  background: var(--blanco);
+  border-radius: var(--radio);
+  padding: 28px;
+  box-shadow: var(--sombra);
+  border-top: 4px solid var(--rosa-medio);
+}
+
+.servicio-categoria h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.2rem;
+  color: var(--burdeos);
+}
+
+.servicio-categoria h3 svg {
+  color: var(--dorado);
+}
+
+.servicio-categoria--productos {
+  background: linear-gradient(150deg, var(--burdeos), var(--rosa-fuerte));
+  color: var(--rosa-clarisimo);
+  border-top-color: var(--dorado);
+}
+
+.servicio-categoria--productos h3 {
+  color: var(--blanco);
+}
+
+.servicio-categoria--productos h3 svg {
+  color: var(--dorado);
+}
+
+.servicio-categoria--productos p {
+  margin: 0;
+}
+
+.lista-precios {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lista-precios li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 0;
+  border-bottom: 1px dashed var(--rosa-claro);
+  font-size: 0.95rem;
+}
+
+.lista-precios li:last-child {
+  border-bottom: none;
+}
+
+.precio {
+  font-weight: 700;
+  color: var(--rosa-fuerte);
+  white-space: nowrap;
+}
+
+.servicios__cta {
+  text-align: center;
+  margin-top: 44px;
+}
+
+/* ===== Sobre nosotras ===== */
+
+.nosotras__grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.nosotras__decoracion {
+  display: flex;
+  justify-content: center;
+  color: var(--rosa);
+}
+
+.lista-check {
+  list-style: none;
+  margin: 20px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.lista-check li {
+  position: relative;
+  padding-left: 30px;
+  font-weight: 500;
+}
+
+.lista-check li::before {
+  content: "✿";
+  position: absolute;
+  left: 0;
+  color: var(--dorado);
+}
+
+/* ===== Horario ===== */
+
+.horario__tarjeta {
+  margin-top: 32px;
+  background: var(--blanco);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  padding: 32px;
+  max-width: 720px;
+}
+
+.tabla-horario {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla-horario th, .tabla-horario td {
+  text-align: left;
+  padding: 14px 10px;
+  border-bottom: 1px solid var(--rosa-clarisimo);
+  font-size: 0.98rem;
+}
+
+.tabla-horario th {
+  color: var(--burdeos);
+  font-weight: 600;
+  width: 40%;
+}
+
+.tabla-horario tr:last-child th,
+.tabla-horario tr:last-child td {
+  border-bottom: none;
+}
+
+.cerrado {
+  color: var(--gris-suave);
+  font-style: italic;
+}
+
+.horario__nota {
+  margin: 20px 0 0;
+  color: var(--gris-suave);
+  font-size: 0.92rem;
+}
+
+/* ===== Contacto ===== */
+
+.contacto__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-top: 32px;
+  align-items: stretch;
+}
+
+.contacto__datos {
+  background: var(--rosa-clarisimo);
+  border-radius: var(--radio);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.lista-contacto {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+}
+
+.lista-contacto strong {
+  display: block;
+  color: var(--burdeos);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 2px;
+}
+
+.contacto__mapa {
+  border-radius: var(--radio);
+  overflow: hidden;
+  min-height: 280px;
+  box-shadow: var(--sombra);
+}
+
+.contacto__mapa-placeholder {
+  height: 100%;
+  min-height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--rosa-claro),
+    var(--rosa-claro) 12px,
+    var(--rosa-clarisimo) 12px,
+    var(--rosa-clarisimo) 24px
+  );
+  color: var(--burdeos);
+  font-weight: 600;
+}
+
+/* ===== Footer ===== */
+
+.pie {
+  background: var(--burdeos);
+  color: var(--rosa-clarisimo);
+  padding: 40px 0;
+}
+
+.pie__interior {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.pie__marca {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--fuente-titulos);
+  font-size: 1.1rem;
+  color: var(--blanco);
+}
+
+.pie__marca svg {
+  color: var(--dorado);
+}
+
+.pie__redes a {
+  color: var(--rosa-claro);
+  font-weight: 600;
+}
+
+.pie__redes a:hover, .pie__redes a:focus-visible {
+  color: var(--dorado);
+}
+
+.pie__legal {
+  width: 100%;
+  font-size: 0.82rem;
+  color: var(--rosa-claro);
+  opacity: 0.8;
+  margin: 0;
+}
+
+/* ===== WhatsApp flotante ===== */
+
+.whatsapp-flotante {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--whatsapp);
+  color: var(--blanco);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 26px rgba(37, 211, 102, 0.5);
+  z-index: 200;
+  animation: pulso-whatsapp 2.4s infinite;
+}
+
+.whatsapp-flotante:hover, .whatsapp-flotante:focus-visible {
+  background: var(--whatsapp-oscuro);
+}
+
+@keyframes pulso-whatsapp {
+  0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.55); }
+  70% { box-shadow: 0 0 0 16px rgba(37, 211, 102, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 860px) {
+  .nosotras__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nosotras__decoracion {
+    order: -1;
+  }
+
+  .contacto__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .menu-toggle {
+    display: flex;
+  }
+
+  .nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--blanco);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px 24px 24px;
+    gap: 16px;
+    border-bottom: 1px solid var(--rosa-claro);
+    transform: translateY(-8px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+  }
+
+  .nav--abierto {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav ul {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .hero {
+    padding: 64px 0 72px;
+  }
+
+  .seccion {
+    padding: 56px 0;
+  }
+}
