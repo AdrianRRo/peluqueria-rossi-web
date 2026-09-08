@@ -311,7 +311,7 @@
         <a href="tel:+34613153380">613 15 33 80</a>
       </nav>
       <p class="pie__legal">
-        © <span id="anioActual">2026</span> Rossi Salón de Belleza · Peluquería en Alhaurín de la Torre (Málaga) · Todos los derechos reservados.
+        © <span id="anioActual">2026</span> Rossi Salón de Belleza · Peluquería en Alhaurín de la Torre (Málaga) · Todos los derechos reservados. · Medimos visitas de forma anónima (sin cookies).
       </p>
     </div>
   </footer>
@@ -373,7 +373,7 @@
       // Galería dinámica. Prioridad: 1) API (lo que sube la dueña desde su panel),
       // 2) manifest.json estático, 3) imágenes de marca. Cascada de fallback => si el
       // API no responde, la web sigue mostrando exactamente lo de ahora.
-      const API_BASE = "https://botarmy.tail0680ed.ts.net:10000";
+      const API_BASE = "https://api.rossisalondebelleza.com";
       const grid = document.getElementById("galeriaGrid");
       if (grid) {
         const pinta = (src, alt) => {
@@ -450,6 +450,28 @@
 
       document.getElementById("anioActual").textContent = new Date().getFullYear();
     });
+  </script>
+
+  <script>
+    // Analítica anónima (sin cookies): medimos visitas y clics en WhatsApp.
+    // Si el API no está disponible, falla en silencio sin afectar a la página.
+    (function () {
+      const API = "https://api.rossisalondebelleza.com"; // mismo API_BASE que la galería
+      const track = (kind, meta) => {
+        try {
+          fetch(API + "/api/track", {
+            method: "POST", mode: "cors", keepalive: true,
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ kind: kind, path: location.pathname, referer: document.referrer || "", meta: meta || {} })
+          }).catch(() => {});
+        } catch (e) {}
+      };
+      track("visit");
+      document.addEventListener("click", (ev) => {
+        const a = ev.target.closest && ev.target.closest("a.js-whatsapp-link");
+        if (a) track("click_wa");
+      });
+    })();
   </script>
 </body>
 </html>
