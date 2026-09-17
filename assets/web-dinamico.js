@@ -126,19 +126,27 @@
   }
 
   // ---------------------------------------------------------------- GALERÍA
+  // ------------------------------------------------------- animaciones de entrada
+  // `observar()` se define AQUÍ, en el ámbito del módulo: la necesitan initGaleria
+  // (fotos) Y arranca (los `.animar` que ya vienen en el HTML). Antes vivía dentro de
+  // initGaleria, así que llamarla desde arranca daba ReferenceError silencioso y el
+  // botón "Ver todos los servicios" + 33 textos de sección quedaban con opacidad 0.
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var io = (!reduce && "IntersectionObserver" in window)
+    ? new IntersectionObserver(function (ents) {
+        ents.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add("visible"); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" })
+    : null;
+  function observar(el) { if (io) io.observe(el); else el.classList.add("visible"); }
+
   function initGaleria() {
     var grid = document.getElementById("galeriaGrid");
     if (!grid) return;
 
-    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    var io = (!reduce && "IntersectionObserver" in window)
-      ? new IntersectionObserver(function (ents) {
-          ents.forEach(function (e) {
-            if (e.isIntersecting) { e.target.classList.add("visible"); io.unobserve(e.target); }
-          });
-        }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" })
-      : null;
-    function observar(el) { if (io) io.observe(el); else el.classList.add("visible"); }
+    // `reduce`, `io` y `observar` viven en el ámbito del módulo (arriba): los comparte
+    // con arranca(). Aquí NO se redefinen.
 
     function esqueleto(n) {
       grid.innerHTML = "";
@@ -294,6 +302,25 @@
     try { initWhatsApp(); } catch (e) {}
     try { initServicios(); } catch (e) {}
     try { initGaleria(); } catch (e) {}
+    // Los `.animar` QUE YA VIENEN EN EL HTML (el botón "Ver todos los servicios",
+    // las cabeceras de sección...) nacen con `opacity: 0` y se revelan al entrar en
+    // pantalla. Esa observación la hacía el JS viejo de la galería, que se ELIMINÓ al
+    // conectar la capa dinámica: sin esto el botón existía, era clicable y medía
+    // 234x58, pero quedaba INVISIBLE (opacidad 0). Medido en producción 2026-09-17.
+    try {
+      document.querySelectorAll(".animar:not(.visible)").forEach(function (el) {
+        if (el.closest("#galeriaGrid") || el.closest("#listadoServicios")) return;
+        observar(el);
+      });
+      // Red de seguridad: si el observador no dispara (ventana rara, navegador sin
+      // soporte, elemento que nunca llega al 12% visible), a los 2,5 s se revelan
+      // TODOS. Es preferible una animación de más que un texto invisible.
+      setTimeout(function () {
+        document.querySelectorAll(".animar:not(.visible)").forEach(function (el) {
+          el.classList.add("visible");
+        });
+      }, 2500);
+    } catch (e) {}
     // Visita: una por carga de página, agrupada por sesión anónima.
     beacon("visit", { referer: document.referrer || null });
   }
