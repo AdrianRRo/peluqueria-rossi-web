@@ -2,11 +2,15 @@
   "images": [
     {
       "file": "ig-01.jpg",
-      "alt": "✨ Rubio beige natural, luminoso y de bajo mantenimiento. Mechas babylights ultra finas par"
+      "alt": "✨ Rubio beige natural, luminoso y de bajo mantenimiento. Mechas babylights ultra finas par",
+      "width": 3024,
+      "height": 3582
     },
     {
       "file": "ig-02.jpg",
-      "alt": "Alisado organico 🌱✨ antes y después"
+      "alt": "Alisado organico 🌱✨ antes y después",
+      "width": 3024,
+      "height": 4013
     },
     {
       "file": "ig-03.jpg",
@@ -14,23 +18,33 @@
     },
     {
       "file": "ig-04.jpg",
-      "alt": "Qué cambio! 😍 Mechas frías para conseguir un rubio más elegante, luminoso y con un acabado"
+      "alt": "Qué cambio! 😍 Mechas frías para conseguir un rubio más elegante, luminoso y con un acabado",
+      "width": 1290,
+      "height": 1712
     },
     {
       "file": "ig-05.jpg",
-      "alt": "Alisado organico✨🌿"
+      "alt": "Alisado organico✨🌿",
+      "width": 3024,
+      "height": 3589
     },
     {
       "file": "ig-07.jpg",
-      "alt": "✨ Cobrizo con mechas vainilla ✨ Un color lleno de dimensión, brillo y movimiento que realz"
+      "alt": "✨ Cobrizo con mechas vainilla ✨ Un color lleno de dimensión, brillo y movimiento que realz",
+      "width": 3024,
+      "height": 3481
     },
     {
       "file": "ig-08.jpg",
-      "alt": "🤎 Mechas caramelo que aportan luz, dimensión y un acabado súper natural ✨"
+      "alt": "🤎 Mechas caramelo que aportan luz, dimensión y un acabado súper natural ✨",
+      "width": 3024,
+      "height": 4013
     },
     {
       "file": "ig-10.jpg",
-      "alt": "Tremendo cambio ✨ De un cabello apagado a una melena con luz, movimiento y un tono mucho m"
+      "alt": "Tremendo cambio ✨ De un cabello apagado a una melena con luz, movimiento y un tono mucho m",
+      "width": 3024,
+      "height": 3652
     }
   ]
 }

@@ -38,18 +38,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="assets/web-publica.css" />
 
   <!-- JSON-LD: Schema.org HairSalon -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "HairSalon",
-    "@id": "https://peluqueria-rossi-web.onrender.com/#negocio",
+    "@id": "https://rossisalondebelleza.com/#negocio",
     "name": "Rossi Salón de Belleza",
     "alternateName": ["Peluquería Rossi", "Peluquería y Salón de Belleza Rossi"],
     "description": "Peluquería y salón de belleza en Alhaurín de la Torre (Málaga): mechas, balayage, alisados, tintes, cortes, recogidos y maquillaje.",
-    "image": "https://peluqueria-rossi-web.onrender.com/assets/og-image.jpg",
-    "url": "https://peluqueria-rossi-web.onrender.com/",
+    "image": "https://rossisalondebelleza.com/assets/og-image.jpg",
+    "url": "https://rossisalondebelleza.com/",
     "telephone": "+34613153380",
     "founder": "Rosali Cruz Núñez",
     "address": {
@@ -77,6 +78,63 @@
     ]
   }
   </script>
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "OfferCatalog",
+    "name": "Servicios de Rossi Salón de Belleza",
+    "url": "https://rossisalondebelleza.com/servicios.html",
+    "itemListElement": [
+      {"@type": "Offer",
+       "itemOffered": {"@type": "Service", "name": "Corte de mujer", "category": "Cortes"}},
+      {"@type": "Offer",
+       "itemOffered": {"@type": "Service", "name": "Corte de caballero", "category": "Cortes"}},
+      {"@type": "Offer",
+       "itemOffered": {"@type": "Service", "name": "Corte de ni\u00f1a", "category": "Cortes"}},
+      {"@type": "Offer",
+       "itemOffered": {"@type": "Service", "name": "Corte de ni\u00f1o", "category": "Cortes"}},
+      {"@type": "Offer",
+       "itemOffered": {"@type": "Service", "name": "Balayage", "category": "Color y mechas"}},
+      {"@type": "Offer",
+       "itemOffered": {"@type": "Service", "name": "Mechas babylight", "category": "Color y mechas"}},
+      {"@type": "Offer",
+       "itemOffered": {"@type": "Service", "name": "Mechas y balayage media melena", "category": "Color y mechas"}},
+      {"@type": "Offer",
+       "itemOffered": {"@type": "Service", "name": "Mechas de pelo corto", "category": "Color y mechas"}},
+      {"@type": "Offer",
+       "itemOffered": {"@type": "Service", "name": "Mechas de flequillo", "category": "Color y mechas"}},
+      {"@type": "Offer",
+       "itemOffered": {"@type": "Service", "name": "Tinte y retoque de tinte", "category": "Color y mechas"}},
+      {"@type": "Offer",
+       "itemOffered": {"@type": "Service", "name": "Matizado", "category": "Color y mechas"}},
+      {"@type": "Offer",
+       "itemOffered": {"@type": "Service", "name": "Alisado organico (corto, media melena y melena larga)", "category": "Alisados y tratamientos"}},
+      {"@type": "Offer",
+       "itemOffered": {"@type": "Service", "name": "Botox capilar", "category": "Alisados y tratamientos"}},
+      {"@type": "Offer",
+       "itemOffered": {"@type": "Service", "name": "Nutrici\u00f3n Nashi", "category": "Alisados y tratamientos"}},
+      {"@type": "Offer",
+       "itemOffered": {"@type": "Service", "name": "salerm 21", "category": "Alisados y tratamientos"}},
+      {"@type": "Offer",
+       "itemOffered": {"@type": "Service", "name": "Recogido y semirrecogido", "category": "Peinados y recogidos"}},
+      {"@type": "Offer",
+       "itemOffered": {"@type": "Service", "name": "Peinado de pelo largo", "category": "Peinados y recogidos"}},
+      {"@type": "Offer",
+       "itemOffered": {"@type": "Service", "name": "Peinado de media melena", "category": "Peinados y recogidos"}},
+      {"@type": "Offer",
+       "itemOffered": {"@type": "Service", "name": "Peinado corto", "category": "Peinados y recogidos"}},
+      {"@type": "Offer",
+       "itemOffered": {"@type": "Service", "name": "Maquillaje para eventos y ocasiones especiales", "category": "Maquillaje"}},
+      {"@type": "Offer",
+       "itemOffered": {"@type": "Service", "name": "Nashi Argan", "category": "Productos"}},
+      {"@type": "Offer",
+       "itemOffered": {"@type": "Service", "name": "salerm 21", "category": "Productos"}},
+      {"@type": "Offer",
+       "itemOffered": {"@type": "Service", "name": "Tahe", "category": "Productos"}}
+    ]
+  }
+  </script>
+
 </head>
 <body>
 
@@ -160,45 +218,40 @@
         <h2 class="seccion__titulo animar">Todo lo que tu cabello necesita</h2>
         <p class="seccion__intro animar">Cortes, color, alisados, recogidos y maquillaje, con productos profesionales Nashi, Salerm y Cotril. Cuéntanos lo que buscas y te asesoramos sin compromiso.</p>
 
-        <div class="servicios__pildoras">
-
+        <div class="servicios__pildoras" id="serviciosPildoras">
+        <!-- RESPALDO:PILDORAS:INICIO -->
+          <!-- Respaldo estático: se ve si el API no responde en 3 s -->
           <a href="servicios.html#cortes" class="servicio-pildora animar" data-animar="sube">
             <svg class="servicio-pildora__icono" width="26" height="26" aria-hidden="true"><use href="#icono-rosa"/></svg>
             <h3>Cortes</h3>
             <p>Corte de mujer, caballero y niños con precisión y estilo.</p>
             <span class="servicio-pildora__enlace">Ver más →</span>
           </a>
-
-          <a href="servicios.html#color-mechas" class="servicio-pildora animar" data-animar="sube">
+          <a href="servicios.html#color-y-mechas" class="servicio-pildora animar" data-animar="sube">
             <svg class="servicio-pildora__icono" width="26" height="26" aria-hidden="true"><use href="#icono-rosa"/></svg>
             <h3>Color y mechas</h3>
             <p>Balayage, mechas babylight y tintes a tu medida.</p>
             <span class="servicio-pildora__enlace">Ver más →</span>
           </a>
-
-          <a href="servicios.html#alisados-tratamientos" class="servicio-pildora animar" data-animar="sube">
+          <a href="servicios.html#alisados-y-tratamientos" class="servicio-pildora animar" data-animar="sube">
             <svg class="servicio-pildora__icono" width="26" height="26" aria-hidden="true"><use href="#icono-rosa"/></svg>
             <h3>Alisados y tratamientos</h3>
             <p>Alisados, botox capilar y nutrición Nashi para tu cabello.</p>
             <span class="servicio-pildora__enlace">Ver más →</span>
           </a>
-
-          <a href="servicios.html#peinados-recogidos" class="servicio-pildora animar" data-animar="sube">
+          <a href="servicios.html#peinados-y-recogidos" class="servicio-pildora animar" data-animar="sube">
             <svg class="servicio-pildora__icono" width="26" height="26" aria-hidden="true"><use href="#icono-rosa"/></svg>
             <h3>Peinados y recogidos</h3>
             <p>Recogidos y peinados para cada ocasión especial.</p>
             <span class="servicio-pildora__enlace">Ver más →</span>
           </a>
-
           <a href="servicios.html#maquillaje" class="servicio-pildora animar" data-animar="sube">
             <svg class="servicio-pildora__icono" width="26" height="26" aria-hidden="true"><use href="#icono-rosa"/></svg>
             <h3>Maquillaje</h3>
             <p>Maquillaje profesional para eventos y ocasiones especiales.</p>
             <span class="servicio-pildora__enlace">Ver más →</span>
           </a>
-
-        </div>
-
+        <!-- RESPALDO:PILDORAS:FIN -->
         <div class="servicios__cta animar">
           <a href="servicios.html" class="boton boton--rosa">Ver todos los servicios</a>
         </div>
@@ -213,7 +266,19 @@
         <p class="seccion__intro animar">Un ambiente cuidado y resultados que hablan por sí solos. Encuentra más trabajos en nuestro Instagram
           <a href="https://www.instagram.com/rossisalondebelleza/" target="_blank" rel="noopener">@rossisalondebelleza</a>.
         </p>
-        <div class="galeria__grid" id="galeriaGrid" aria-live="polite"></div>
+        <div class="galeria__grid" id="galeriaGrid" aria-live="polite">
+        <!-- RESPALDO:GALERIA:INICIO -->
+        <!-- Respaldo estático de la galería (si el API no responde) -->
+        <figure class="galeria__item galeria__item--alta galeria__item--cargada"><img src="assets/gallery/ig-01.jpg" alt="✨ Rubio beige natural, luminoso y de bajo mantenimiento. Mechas babylights ultra finas par" loading="lazy" width="3024" height="3582" /></figure>
+        <figure class="galeria__item galeria__item--alta galeria__item--cargada"><img src="assets/gallery/ig-02.jpg" alt="Alisado organico 🌱✨ antes y después" loading="lazy" width="3024" height="4013" /></figure>
+        <figure class="galeria__item galeria__item--alta galeria__item--cargada"><img src="assets/gallery/ig-03.jpg" alt="✨ Color arena, luminoso y natural. Un rubio elegante con un acabado suave y mucho brillo." loading="lazy" width="3024" height="3715" /></figure>
+        <figure class="galeria__item galeria__item--alta galeria__item--cargada"><img src="assets/gallery/ig-04.jpg" alt="Qué cambio! 😍 Mechas frías para conseguir un rubio más elegante, luminoso y con un acabado" loading="lazy" width="1290" height="1712" /></figure>
+        <figure class="galeria__item galeria__item--alta galeria__item--cargada"><img src="assets/gallery/ig-05.jpg" alt="Alisado organico✨🌿" loading="lazy" width="3024" height="3589" /></figure>
+        <figure class="galeria__item galeria__item--alta galeria__item--cargada"><img src="assets/gallery/ig-07.jpg" alt="✨ Cobrizo con mechas vainilla ✨ Un color lleno de dimensión, brillo y movimiento que realz" loading="lazy" width="3024" height="3481" /></figure>
+        <figure class="galeria__item galeria__item--alta galeria__item--cargada"><img src="assets/gallery/ig-08.jpg" alt="🤎 Mechas caramelo que aportan luz, dimensión y un acabado súper natural ✨" loading="lazy" width="3024" height="4013" /></figure>
+        <figure class="galeria__item galeria__item--alta galeria__item--cargada"><img src="assets/gallery/ig-10.jpg" alt="Tremendo cambio ✨ De un cabello apagado a una melena con luz, movimiento y un tono mucho m" loading="lazy" width="3024" height="3652" /></figure>
+        <!-- RESPALDO:GALERIA:FIN -->
+        </div>
       </div>
     </section>
 
@@ -233,7 +298,7 @@
           </ul>
         </div>
         <figure class="nosotras__imagen animar" data-animar="izquierda">
-          <img src="assets/salon.jpg" alt="Ambiente del salón Peluquería Rossi con detalles en rosa" loading="lazy" width="800" height="600" />
+          <img src="assets/salon.jpg" alt="Letrero de neón «Haz que tu belleza brille» sobre un muro vegetal en Rossi Salón de Belleza, Alhaurín de la Torre" loading="lazy" width="960" height="1280" />
         </figure>
       </div>
     </section>
@@ -370,43 +435,7 @@
       const observar = (el) => { if (io) io.observe(el); else el.classList.add("visible"); };
       document.querySelectorAll(".animar").forEach(observar);
 
-      // Galería dinámica. Prioridad: 1) API (lo que sube la dueña desde su panel),
-      // 2) manifest.json estático, 3) imágenes de marca. Cascada de fallback => si el
-      // API no responde, la web sigue mostrando exactamente lo de ahora.
-      const API_BASE = "https://api.rossisalondebelleza.com";
-      const grid = document.getElementById("galeriaGrid");
-      if (grid) {
-        const pinta = (src, alt) => {
-          const fig = document.createElement("figure");
-          fig.className = "galeria__item animar";
-          fig.setAttribute("data-animar", "zoom");
-          const img = document.createElement("img");
-          img.src = src;
-          img.alt = alt || "Trabajo de Peluquería Rossi";
-          img.loading = "lazy";
-          fig.appendChild(img);
-          grid.appendChild(fig);
-          observar(fig);
-        };
-        const desdeManifest = () =>
-          fetch("assets/gallery/manifest.json", { cache: "no-store" })
-            .then((r) => (r.ok ? r.json() : Promise.reject()))
-            .then((data) => {
-              const imgs = (data && data.images) || [];
-              if (!imgs.length) return Promise.reject();
-              imgs.forEach((it) => pinta("assets/gallery/" + it.file, it.alt));
-            });
-        const desdeMarca = () =>
-          ["salon.jpg", "color.jpg", "care.jpg", "roses.jpg", "bridal.jpg"]
-            .forEach((f) => pinta("assets/" + f, "Peluquería Rossi"));
-        fetch(API_BASE + "/api/gallery", { cache: "no-store" })
-          .then((r) => (r.ok ? r.json() : Promise.reject()))
-          .then((imgs) => {
-            if (!Array.isArray(imgs) || !imgs.length) return Promise.reject();
-            imgs.forEach((it) => pinta(API_BASE + "/api/gallery/" + it.id, it.alt));
-          })
-          .catch(() => desdeManifest().catch(desdeMarca));
-      }
+
 
       // Reseñas de Google (snapshot en assets/reviews.json)
       const resenasGrid = document.getElementById("resenasGrid");
@@ -473,5 +502,6 @@
       });
     })();
   </script>
+  <script src="assets/web-dinamico.js" defer></script>
 </body>
 </html>

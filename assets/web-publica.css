@@ -1,0 +1,217 @@
+/* ============================================================================
+ * web-publica.css — estilos de las mejoras de la web pública (F2/F3/F4)
+ * ============================================================================
+ * Se importa DESPUÉS de styles.css. Nada de aquí es un rediseño: solo lo
+ * necesario para que las fotos verticales no se recorten, la carga se vea
+ * (esqueleto + fundido) y el lightbox funcione.
+ * ==========================================================================*/
+
+/* ---------------------------------------------------------------- GALERÍA
+ * Cuadrícula UNIFORME 4:5 — decisión de Adrián (2026-09-16): todas las tarjetas
+ * con el MISMO ancho y el MISMO alto, como estaba en producción.
+ *
+ * Historia de este bloque (importante para no repetir el error):
+ *   1. Original: grid de 300px + `object-fit: cover` -> recortaba las verticales.
+ *   2. F3/F4 lo cambiaron a MOSAICO por columnas (alto natural). Quitaba el recorte
+ *      pero DESALINEABA la rejilla: cada tarjeta con su alto. Adrián lo detectó como
+ *      regresión: "antes se veían bien y tenían el mismo ancho y alto".
+ *   3. Solución final: cuadrícula uniforme en proporción 4:5. Medido con los ratios
+ *      reales de las 8 fotos de IG, es la que MENOS recorta de todas las uniformes:
+ *       1:1 -> pierde hasta 25% | la vieja 259x300 -> 13% | 5:6 -> 10% | 4:5 -> 8%
+ *      Y el recorte es simétrico desde el centro (nunca la cara ni el conjunto).
+ *      La foto completa, sin recorte, se ve al ampliarla (lightbox).
+ */
+.galeria__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+.galeria__item {
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--radio);
+  box-shadow: var(--sombra-suave);
+  position: relative;
+  background: #f6eef1;                 /* fondo suave mientras carga */
+  aspect-ratio: 4 / 5;                 /* MISMO alto para todas */
+}
+.galeria__item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;                   /* llena la tarjeta; el sobrante se recorta */
+  object-position: center;             /* recorte simétrico: nunca corta la cara */
+  opacity: 0;
+  transition: opacity 0.6s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.galeria__item--cargada img { opacity: 1; }
+.galeria__item:hover.galeria__item--cargada img { transform: scale(1.04); }
+.galeria__item--error { display: none; }   /* una foto que no carga no deja hueco roto */
+
+/* Esqueleto de carga: se ve mientras el API responde (o mientras se decide) */
+.galeria__esqueleto {
+  border-radius: var(--radio);
+  background: linear-gradient(100deg, #f4e7ec 30%, #fbdfe8 50%, #f4e7ec 70%);
+  background-size: 220% 100%;
+  animation: rossiBrillo 1.4s linear infinite;
+  aspect-ratio: 4 / 5;                 /* mismo hueco que la tarjeta final */
+  margin: 0;
+}
+@keyframes rossiBrillo {
+  from { background-position: 180% 0; }
+  to   { background-position: -60% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .galeria__esqueleto { animation: none; }
+  .galeria__item img { transition: none; }
+}
+
+/* ---------------------------------------------------------------- LIGHTBOX
+ * Ver la foto COMPLETA (la vertical entera) al hacer clic.
+ */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.8rem, 3vw, 2.5rem);
+  background: rgba(38, 20, 28, 0.92);
+  backdrop-filter: blur(3px);
+}
+.lightbox--abierto { display: flex; }
+.lightbox__figura {
+  margin: 0;
+  max-width: min(96vw, 1100px);
+  max-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+.lightbox__img {
+  /* La vertical se ve ENTERA: alto limitado al viewport y ancho automático */
+  max-width: 100%;
+  max-height: 82vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--radio);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+  background: #fff;
+}
+.lightbox__pie {
+  color: #fff;
+  font-size: 0.92rem;
+  text-align: center;
+  max-width: 60ch;
+  opacity: 0.92;
+}
+.lightbox__cerrar {
+  position: absolute;
+  top: clamp(0.6rem, 2vw, 1.4rem);
+  right: clamp(0.6rem, 2vw, 1.4rem);
+  width: 46px;
+  height: 46px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #7a2740;
+  font-size: 1.7rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.lightbox__cerrar:hover { background: #fff; }
+body.sin-scroll { overflow: hidden; }
+
+/* ---------------------------------------------------------------- HERO (F5)
+ * El hero es un fondo CSS (`.hero__fondo`), no un <img>, así que para servir WebP hay
+ * que usar `image-set()`: el navegador elige el WebP (133,1 KB) y sólo quien no lo
+ * entienda se queda con el JPEG (144,3 KB).
+ *
+ * CLAVE de seguridad: el `background` con el JPEG ya está en styles.css, así que si
+ * este bloque no se entendiera (navegador viejo) la declaración se descarta ENTERA y el
+ * hero sigue funcionando con el JPEG. Nunca se queda sin imagen.
+ * Se sobreescribe SÓLO `background-image`: posición/tamaño/repeat (center/cover) y la
+ * animación `heroZoom` siguen viniendo de styles.css.
+ *
+ * OJO con las rutas: este fichero vive en `assets/`, así que las URLs relativas se
+ * resuelven DESDE `assets/`. Escribir "assets/hero.webp" daría 404 en
+ * `/assets/assets/hero.webp` (bug detectado al medir los recursos que descarga el
+ * navegador). Aquí va el nombre a secas.
+ */
+.hero__fondo {
+  background-image: -webkit-image-set(
+    url("hero.webp") type("image/webp") 1x,
+    url("hero.jpg") type("image/jpeg") 1x);
+  background-image: image-set(
+    url("hero.webp") type("image/webp") 1x,
+    url("hero.jpg") type("image/jpeg") 1x);
+}
+
+/* ------------------------------------------------------------ NOSOTRAS (F5)
+ * La sección "Un salón cercano, pensado para ti" llevaba `aspect-ratio: 4/3` +
+ * `object-fit: cover` en styles.css, pensado para una foto horizontal. La foto nueva
+ * de Adrián es VERTICAL (960x1280, ratio 0,75), así que con el marco 4:3 el navegador
+ * recortaba casi la mitad de la foto (por arriba y por abajo) para llenarlo.
+ *
+ * Regla dura del encargo: la vertical NO se recorta ni se deforma. Solución: el marco
+ * pasa a respetar el ratio NATURAL de la foto.
+ *   - `aspect-ratio: 3 / 4`   el hueco ya es vertical -> no hay que recortar nada.
+ *   - `object-fit: contain`   red de seguridad: si algún día se cambiara la foto por
+ *                             una de otro formato, se vería ENTERA (con fondo suave)
+ *                             en lugar de recortada.
+ *   - `altura máxima`         en pantallas bajas la vertical no puede crecer sin fin;
+ *                             se limita a 70svh y se centra.
+ * Sólo afecta a esta sección: la galería (F3/F4) tiene sus propias reglas.
+ */
+.nosotras__imagen {
+  /* `width` EXPLÍCITO, no negociable: sin él, este elemento es un ítem de grid con
+   * `margin-inline:auto` -> el navegador lo dimensiona "shrink-to-fit", y su único
+   * hijo usa `width:100%`. Esa dependencia circular resuelve a 0 px y la figura
+   * DESAPARECE (medido en móvil: 0x0 antes de cargar la imagen). Con una anchura
+   * definida, el cálculo es directo en todos los tamaños. */
+  width: 100%;
+  /* El tope por ALTURA va como tope de ANCHO: `70svh` de alto en proporción 3:4 son
+   * `70svh * 3/4` de ancho. Así la ventana baja encoge la figura SIN romper el ratio
+   * (que es lo que hace un `max-height`: convierte el marco en casi cuadrado y, con
+   * `contain`, abre franjas de fondo a los lados — bug medido 2026-09-16 en ventana
+   * de 633 px de alto: 63 px de franja por lado; en ventana alta no aparecía). */
+  max-width: min(100%, 460px, calc(70svh * 3 / 4));
+  aspect-ratio: 3 / 4;
+  margin-inline: auto;
+}
+.nosotras__imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;      /* si algún día la foto no fuera 3:4, se ve entera */
+  background: #f6eef1;
+}
+/* En móvil la columna pasa a fila única (styles.css) y la vertical ocuparía toda la
+ * pantalla: se limita el ancho para que el conjunto no quede desproporcionado. */
+@media (max-width: 900px) {
+  .nosotras__imagen { max-width: min(100%, 380px); }
+}
+
+/* ---------------------------------------------------------------- SERVICIOS
+ * Píldoras de portada y cabecera de grupo en servicios.html con su imagen.
+ * El texto pasa a ir encima de la foto, así que se refuerza el contraste.
+ */
+.servicio-pildora__foto {
+  display: block;
+  width: calc(100% + 2rem);
+  margin: -1rem -1rem 0.7rem;
+  height: 150px;
+  object-fit: cover;
+  border-radius: var(--radio) var(--radio) 0 0;
+}
+.servicio-categoria__foto {
+  display: block;
+  width: 100%;
+  max-height: 260px;
+  object-fit: cover;
+  border-radius: var(--radio);
+  margin-bottom: 1rem;
+}
+.servicios__indice a { white-space: nowrap; }

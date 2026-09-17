@@ -38,18 +38,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="assets/web-publica.css" />
 
   <!-- JSON-LD: Schema.org HairSalon -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "HairSalon",
-    "@id": "https://peluqueria-rossi-web.onrender.com/#negocio",
+    "@id": "https://rossisalondebelleza.com/#negocio",
     "name": "Rossi Salón de Belleza",
     "alternateName": ["Peluquería Rossi", "Peluquería y Salón de Belleza Rossi"],
     "description": "Peluquería y salón de belleza en Alhaurín de la Torre (Málaga): mechas, balayage, alisados, tintes, cortes, recogidos y maquillaje.",
-    "image": "https://peluqueria-rossi-web.onrender.com/assets/og-image.jpg",
-    "url": "https://peluqueria-rossi-web.onrender.com/",
+    "image": "https://rossisalondebelleza.com/assets/og-image.jpg",
+    "url": "https://rossisalondebelleza.com/",
     "telephone": "+34613153380",
     "founder": "Rosali Cruz Núñez",
     "address": {
@@ -77,6 +78,12 @@
     ]
   }
   </script>
+  <style>
+    /* Anclas heredadas: los enlaces ya indexados apuntaban a
+       #color-mechas y ahora los ids salen del título de la DB
+       (#color-y-mechas). Así no se rompe ningún enlace indexado. */
+    .ancla-legacy { display: block; position: relative; top: -84px; visibility: hidden; }
+  </style>
 </head>
 <body class="pagina-secundaria">
 
@@ -134,13 +141,10 @@
         <p class="seccion__kicker animar" data-animar="sube">Nuestros servicios</p>
         <h1 class="seccion__titulo animar" data-animar="sube">Todo lo que tu cabello necesita</h1>
         <p class="seccion__intro animar" data-animar="sube">Cortes, color, alisados, recogidos y maquillaje, con productos profesionales Nashi, Salerm y Cotril. Cuéntanos lo que buscas y te asesoramos sin compromiso.</p>
-        <ul class="servicios__indice animar" data-animar="sube">
-          <li><a href="#cortes">Cortes</a></li>
-          <li><a href="#color-mechas">Color y mechas</a></li>
-          <li><a href="#alisados-tratamientos">Alisados y tratamientos</a></li>
-          <li><a href="#peinados-recogidos">Peinados y recogidos</a></li>
-          <li><a href="#maquillaje">Maquillaje</a></li>
-          <li><a href="#productos">Productos</a></li>
+        <ul class="servicios__indice animar" data-animar="sube" id="serviciosIndice">
+        <!-- RESPALDO:INDICE:INICIO -->
+          <li><a href="#cortes">Cortes</a></li><li><a href="#color-y-mechas">Color y mechas</a></li><li><a href="#alisados-y-tratamientos">Alisados y tratamientos</a></li><li><a href="#peinados-y-recogidos">Peinados y recogidos</a></li><li><a href="#maquillaje">Maquillaje</a></li><li><a href="#productos">Productos</a></li>
+        <!-- RESPALDO:INDICE:FIN -->
         </ul>
       </div>
     </section>
@@ -148,9 +152,13 @@
     <!-- LISTADO DE SERVICIOS -->
     <section class="seccion seccion--clara">
       <div class="contenedor">
-
+        <div id="listadoServicios">
+        
+        <!-- RESPALDO:ARTICULOS:INICIO -->
+        <span class="ancla-legacy" id="cortes" aria-hidden="true"></span>
         <article class="servicio-categoria servicio-categoria--detalle animar" data-animar="sube" id="cortes">
           <h2><svg width="20" height="20" aria-hidden="true"><use href="#icono-rosa"/></svg> Cortes</h2>
+          <p>Corte de mujer, caballero y niños con precisión y estilo.</p>
           <ul class="lista-servicios">
             <li>Corte de mujer</li>
             <li>Corte de caballero</li>
@@ -159,8 +167,10 @@
           </ul>
         </article>
 
-        <article class="servicio-categoria servicio-categoria--detalle animar" data-animar="sube" id="color-mechas">
+        <span class="ancla-legacy" id="color-mechas" aria-hidden="true"></span>
+        <article class="servicio-categoria servicio-categoria--detalle animar" data-animar="sube" id="color-y-mechas">
           <h2><svg width="20" height="20" aria-hidden="true"><use href="#icono-rosa"/></svg> Color y mechas</h2>
+          <p>Balayage, mechas babylight y tintes a tu medida.</p>
           <ul class="lista-servicios">
             <li>Balayage</li>
             <li>Mechas babylight</li>
@@ -168,22 +178,26 @@
             <li>Mechas de pelo corto</li>
             <li>Mechas de flequillo</li>
             <li>Tinte y retoque de tinte</li>
-            <li>Matiz y matizado</li>
+            <li>Matizado</li>
           </ul>
         </article>
 
-        <article class="servicio-categoria servicio-categoria--detalle animar" data-animar="sube" id="alisados-tratamientos">
+        <span class="ancla-legacy" id="alisados-tratamientos" aria-hidden="true"></span>
+        <article class="servicio-categoria servicio-categoria--detalle animar" data-animar="sube" id="alisados-y-tratamientos">
           <h2><svg width="20" height="20" aria-hidden="true"><use href="#icono-rosa"/></svg> Alisados y tratamientos</h2>
+          <p>Alisados, botox capilar y nutrición Nashi para tu cabello.</p>
           <ul class="lista-servicios">
-            <li>Alisado (corto, media melena y melena larga)</li>
-            <li>Permanente</li>
+            <li>Alisado organico (corto, media melena y melena larga)</li>
             <li>Botox capilar</li>
             <li>Nutrición Nashi</li>
+            <li>salerm 21</li>
           </ul>
         </article>
 
-        <article class="servicio-categoria servicio-categoria--detalle animar" data-animar="sube" id="peinados-recogidos">
+        <span class="ancla-legacy" id="peinados-recogidos" aria-hidden="true"></span>
+        <article class="servicio-categoria servicio-categoria--detalle animar" data-animar="sube" id="peinados-y-recogidos">
           <h2><svg width="20" height="20" aria-hidden="true"><use href="#icono-rosa"/></svg> Peinados y recogidos</h2>
+          <p>Recogidos y peinados para cada ocasión especial.</p>
           <ul class="lista-servicios">
             <li>Recogido y semirrecogido</li>
             <li>Peinado de pelo largo</li>
@@ -192,18 +206,27 @@
           </ul>
         </article>
 
+        <span class="ancla-legacy" id="maquillaje" aria-hidden="true"></span>
         <article class="servicio-categoria servicio-categoria--detalle animar" data-animar="sube" id="maquillaje">
           <h2><svg width="20" height="20" aria-hidden="true"><use href="#icono-rosa"/></svg> Maquillaje</h2>
+          <p>Maquillaje profesional para eventos y ocasiones especiales.</p>
           <ul class="lista-servicios">
             <li>Maquillaje para eventos y ocasiones especiales</li>
           </ul>
         </article>
 
+        <span class="ancla-legacy" id="productos" aria-hidden="true"></span>
         <article class="servicio-categoria servicio-categoria--detalle servicio-categoria--productos animar" data-animar="sube" id="productos">
           <h2><svg width="20" height="20" aria-hidden="true"><use href="#icono-rosa"/></svg> Productos</h2>
-          <p>Cuidamos tu cabello con líneas profesionales <strong>Nashi</strong>, <strong>Salerm</strong> y <strong>Cotril</strong>. Pregúntanos por el producto ideal para mantener tu color y tu tratamiento en casa.</p>
+          <ul class="lista-servicios">
+            <li>Nashi Argan</li>
+            <li>salerm 21</li>
+            <li>Tahe</li>
+          </ul>
         </article>
 
+        <!-- RESPALDO:ARTICULOS:FIN -->
+        </div>
         <div class="cta-final animar">
           <a href="#" class="boton boton--whatsapp boton--grande js-whatsapp-link" target="_blank" rel="noopener">Pedir cita por WhatsApp</a>
         </div>
@@ -382,5 +405,6 @@
       });
     })();
   </script>
+  <script src="assets/web-dinamico.js" defer></script>
 </body>
 </html>
