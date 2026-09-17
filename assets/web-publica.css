@@ -25,6 +25,11 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 1rem;
+  /* CRÍTICO: sin esto, `styles.css` deja `grid-auto-rows:300px` y como la tarjeta
+   * mide 323,5 px (4:5 de 258,8) las FILAS SE SOLAPAN 7 px (medido en producción
+   * 2026-09-17: fila1 abajo 1998 vs fila2 arriba 1991). `auto` deja que la altura la
+   * fije el `aspect-ratio` de cada tarjeta. */
+  grid-auto-rows: auto;
 }
 .galeria__item {
   margin: 0;
@@ -34,6 +39,11 @@
   position: relative;
   background: #f6eef1;                 /* fondo suave mientras carga */
   aspect-ratio: 4 / 5;                 /* MISMO alto para todas */
+  /* La tarjeta es clicable y amplía la foto: el cursor debe DECIRLO. El JS le pone
+   * role="button" y tabindex, así que sin esto el navegador usaba `auto` y el clic
+   * no se anunciaba visualmente (reportado por Adrián 2026-09-17). */
+  cursor: pointer;
+  cursor: zoom-in;                     /* `zoom-in` donde esté soportado: más explícito */
 }
 .galeria__item img {
   display: block;

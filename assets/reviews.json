@@ -1,14 +1,26 @@
 {
   "place": "Rossi salón de belleza",
   "rating": 5,
-  "count": 14,
+  "count": 16,
   "url": "https://search.google.com/local/reviews?placeid=ChIJ_a6uBAD7cg0RHI2rUBl6_uM",
   "reviews": [
     {
       "name": "isabel luna",
       "stars": 5,
-      "date": "Hace 3 meses",
+      "date": "Hace 4 meses",
       "text": "Quería dejar una reseña para la peluquería de Rosi porque de verdad se lo merece. Desde que entras, el trato es impresionante, cercano, amable y muy profesional. Rosi te hace sentir como en casa y se nota que le apasiona su trabajo. La peluquería está recién abierta en Alhaurín de la Torre y da gusto encontrar sitios a"
+    },
+    {
+      "name": "Erica Postigo",
+      "stars": 5,
+      "date": "Hace 5 meses",
+      "text": "Rossi es una profesional y un encanto. Quería hacerme un cambio drástico y me ayudó a escoger el color, estoy muy contenta con el resultado. Además, mi pelo es rizado y difícil y también ha sabido adaptarme el corte de pelo a lo que yo quería y me lo dejó muy bien hidratado. Gracias 😊"
+    },
+    {
+      "name": "Daniela Dorta",
+      "stars": 5,
+      "date": "Hace 5 meses",
+      "text": "Un servicio increíble. Fui para un tratamiento de hidratación y unas mechas y el cabello me quedó suave y brillante. La atención es genial!"
     },
     {
       "name": "Florencia Romero",
@@ -17,28 +29,40 @@
       "text": "Es la vez que mejor me han dejado el pelo en la vida. Rosalí tiene muy buena mano y me dejó el pelo precioso, suave, ligero y brillante, y el corte perfecto. ¡Volveré seguro!"
     },
     {
-      "name": "Erica Postigo",
+      "name": "María Victoria González Cotilla",
       "stars": 5,
-      "date": "Hace 4 meses",
-      "text": "Rossi es una profesional y un encanto. Quería hacerme un cambio drástico y me ayudó a escoger el color, estoy muy contenta con el resultado. Además, mi pelo es rizado y difícil y también ha sabido adaptarme el corte de pelo a lo que yo quería y me lo dejó muy bien hidratado. Gracias 😊"
+      "date": "Hace 3 meses",
+      "text": "Por fin una persona que se preocupa por mi pelo, por lo que le hace falta y lo que no. Rossi es una profesional, me ha dejado el pelo precioso con su hidratación ya que lo tenía fatal, además de ser un encanto de persona."
     },
     {
       "name": "Priscila palomeque",
       "stars": 5,
-      "date": "Hace 5 meses",
+      "date": "Hace 6 meses",
       "text": "La verdad que Rosalí tiene arte en las manos, me ah hecho una nutrición y mi pelo quedó muy suave e hidratado, también me ah hecho un corte de pelo, exactamente como lo quería. Estoy muy feliz con el resultado. Volveré muy pronto!"
     },
     {
-      "name": "Daniela Dorta",
+      "name": "Mar Flury Chacon",
       "stars": 5,
-      "date": "Hace 4 meses",
-      "text": "Un servicio increíble. Fui para un tratamiento de hidratación y unas mechas y el cabello me quedó suave y brillante. La atención es genial!"
+      "date": "Hace 3 meses",
+      "text": "Súper encantada tanto con el corte Pixie cómo con las mechas con integración de canas! Volveré 🥰"
     },
     {
-      "name": "María Victoria González Cotilla",
+      "name": "Olivia Alfonso Carrera [Dickens ES]",
       "stars": 5,
-      "date": "Hace 2 meses",
-      "text": "Por fin una persona que se preocupa por mi pelo, por lo que le hace falta y lo que no. Rossi es una profesional, me ha dejado el pelo precioso con su hidratación ya que lo tenía fatal, además de ser un encanto de persona."
+      "date": "hace 4 días",
+      "text": "Una experiencia increíble con Rosali Rosali fue, sin duda, la mejor. Soy de Estados Unidos y nunca nadie me había dejado el pelo como ella. Además de utilizar productos de muy buena calidad que cuidan el cabello, se nota que es una auténtica profesional, con muchísima experiencia y conocimiento. Mi pelo nunca se había "
+    },
+    {
+      "name": "Alicia Giménez Rivera",
+      "stars": 5,
+      "date": "Hace un mes",
+      "text": "Hacía mucho tiempo que no iba a la peluquería. Entré como la \"Bruja Avería\" y cuando salí no me reconocía. Rossi es una profesional que sabe lo que hace.Te recomienda, te explica y te mima. Cómo digo me encantó el resultado. Por fin he encontrado mi pelu en Alhaurín de la Torre. 😍😍😍. Muchas gracias!!"
+    },
+    {
+      "name": "Laura carballo",
+      "stars": 5,
+      "date": "Hace 6 meses",
+      "text": "Todo un descubrimiento.Rosalí ha sido muy amable y me ha asesorado en todo momento ya que yo iba con dudas sobre qué corte podría hacerme y he salido encantada con el corte y el trato. Volveré cada mes . Un 10 de 10 super recomendable."
     }
   ]
 }
